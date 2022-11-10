@@ -1,0 +1,19 @@
+.start-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.start-container h1 {
+	font-size: 4rem;
+	letter-spacing: 2px;
+	font-weight: 600;
+}
+
+.quiz-description {
+	font-size: 1.6rem;
+}
+
+.btn-start {
+	margin: 4rem 0;
+}
