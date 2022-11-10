@@ -6,6 +6,7 @@ import Questions from '../components/Questions';
 function App() {
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [questions, setQuestions] = useState([]);
+	const [userAnswers, setUserAnswers] = useState([]);
 
 	function fetchQuestions() {
 		fetch('https://opentdb.com/api.php?amount=5&category=17&encode=url3986')
@@ -15,19 +16,18 @@ function App() {
 				console.log(JSON.stringify(response));
 				let fetchedQuestions = [];
 
-				response.forEach((item) => {
+				response.forEach((item, idx) => {
 					const {
 						question,
 						correct_answer: correct,
 						incorrect_answers: incorrect,
 					} = item;
 
-					console.log();
-
 					const questionObj = {
 						question: decodeURIComponent(question),
 						correct: decodeURIComponent(correct),
 						answers: [correct, ...incorrect],
+						index: idx,
 					};
 
 					fetchedQuestions.push(questionObj);
@@ -45,14 +45,30 @@ function App() {
 		setIsPlaying(() => true);
 	}
 
-	console.log(isPlaying);
+	function checkResults() {
+		console.log('check results');
+	}
+
+	function handleClick(e) {
+		e.target.classList.toggle('checked');
+
+		console.log(e.target.classList.contains('checked'));
+		// setUserAnswers((oldState) => {
+		// });
+	}
+
+	console.log(userAnswers);
 
 	return (
 		<div className='app'>
 			{!isPlaying ? (
 				<Start startPlaying={startPlaying} />
 			) : (
-				<Questions questions={questions} />
+				<Questions
+					questions={questions}
+					checkResults={checkResults}
+					handleClick={handleClick}
+				/>
 			)}
 		</div>
 	);

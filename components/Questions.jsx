@@ -4,15 +4,27 @@ import Question from './Question';
 import { nanoid } from 'nanoid';
 import './questions.css';
 
-export default function Questions({ questions } = props) {
+export default function Questions({
+	questions,
+	checkResults,
+	handleClick,
+} = props) {
 	const questionEls = questions.map((item) => {
-		return <Question question={item} key={nanoid()} />;
+		return (
+			<Question
+				question={item}
+				key={questions.index}
+				handleClick={handleClick}
+			/>
+		);
 	});
 
 	return (
 		<div className='game-container'>
 			<div className='questions-container'>{questionEls}</div>
-			<button className='btn btn-small'>Check answers</button>
+			<button className='btn btn-small' onClick={checkResults}>
+				Check answers
+			</button>
 		</div>
 	);
 }
