@@ -36,8 +36,14 @@ body {
 	border-radius: 10px;
 	cursor: pointer;
 	transition: background-color 0.3s linear;
+	margin-top: 2rem;
 }
 
 .btn:hover {
 	background-color: #3426f7;
+}
+
+.btn-small {
+	padding: 0.8rem 1.6rem;
+	font-size: 1.6rem;
 }
