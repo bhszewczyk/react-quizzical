@@ -36,7 +36,6 @@ body {
 	border-radius: 10px;
 	cursor: pointer;
 	transition: background-color 0.3s linear;
-	margin-top: 2rem;
 }
 
 .btn:hover {
@@ -50,4 +49,9 @@ body {
 
 .answer.checked {
 	background-color: #e9a772;
+}
+
+.btn:disabled {
+	cursor: default;
+	background-color: gray;
 }

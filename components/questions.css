@@ -1,3 +1,36 @@
 .questions-container {
 	margin-bottom: 6rem;
 }
+
+.questions-container h3 {
+	font-size: 2rem;
+}
+
+.answers-container {
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.6rem;
+	padding: 1rem 0 2rem;
+}
+
+.answers-container span {
+	background-color: #cad0e2;
+	color: #080357;
+	padding: 0.4rem 0.8rem;
+	border-radius: 16px;
+	cursor: pointer;
+	transition: all 0.2s linear;
+}
+
+.question-container {
+	margin-bottom: 1rem;
+	border-bottom: 1px solid #080357;
+}
+
+.answers-container span.checked {
+	background-color: chocolate;
+	color: #fff;
+	border: 0;
+}
