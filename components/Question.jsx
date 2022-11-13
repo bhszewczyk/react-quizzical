@@ -1,4 +1,5 @@
 import React from 'react';
+import Answer from './Answer';
 
 export default function Question(props) {
 	return (
@@ -7,13 +8,14 @@ export default function Question(props) {
 			<div className='answers-container'>
 				{props.item.answers.map((answer, aIdx) => {
 					return (
-						<span
+						<Answer
+							props
 							key={aIdx}
-							onClick={(e) => props.checkAnswerHandler(e, props.id, aIdx)}
-							className={answer.isChecked ? 'checked' : ''}
-						>
-							{decodeURIComponent(answer.value)}
-						</span>
+							id={props.id}
+							aIdx={aIdx}
+							checkAnswerHandler={props.checkAnswerHandler}
+							answer={answer}
+						/>
 					);
 				})}
 			</div>
