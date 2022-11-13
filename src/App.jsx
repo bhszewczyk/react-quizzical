@@ -8,12 +8,28 @@ function App() {
 	const [questions, setQuestions] = useState([]);
 	const [userAnswers, setUserAnswers] = useState([]);
 
+	function toggleCheck(target, id, answerChecked) {
+		const answer = target.innerText;
+		console.log(target, id, answerChecked);
+		setUserAnswers((oldAnswers) => {
+			return [
+				...oldAnswers,
+				{
+					questionId: id,
+					userAnswer: answer,
+				},
+			];
+		});
+	}
+
+	// console.log(userAnswers);
+
 	function fetchQuestions() {
 		fetch('https://opentdb.com/api.php?amount=5&category=17&encode=url3986')
 			.then((res) => res.json())
 			.then((data) => {
 				const response = data.results;
-				console.log(JSON.stringify(response));
+				// console.log(JSON.stringify(response));
 				let fetchedQuestions = [];
 
 				response.forEach((item, idx) => {
@@ -49,15 +65,11 @@ function App() {
 		console.log('check results');
 	}
 
-	function handleClick(e) {
-		e.target.classList.toggle('checked');
-
-		console.log(e.target.classList.contains('checked'));
-		// setUserAnswers((oldState) => {
-		// });
-	}
-
-	console.log(userAnswers);
+	// function handleClick(e) {
+	// 	e.target.classList.toggle('checked');
+	// 	// setUserAnswers((oldState) => {
+	// 	// });
+	// }
 
 	return (
 		<div className='app'>
@@ -67,7 +79,8 @@ function App() {
 				<Questions
 					questions={questions}
 					checkResults={checkResults}
-					handleClick={handleClick}
+					// handleClick={handleClick}
+					toggleCheckAnswer={toggleCheck}
 				/>
 			)}
 		</div>

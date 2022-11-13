@@ -8,13 +8,17 @@ export default function Questions({
 	questions,
 	checkResults,
 	handleClick,
+	toggleCheckAnswer,
+	answerChecked,
 } = props) {
 	const questionEls = questions.map((item) => {
 		return (
 			<Question
 				question={item}
-				key={questions.index}
-				handleClick={handleClick}
+				key={nanoid()}
+				id={item.index}
+				toggleCheckAnswer={toggleCheckAnswer}
+				answerChecked={answerChecked}
 			/>
 		);
 	});
