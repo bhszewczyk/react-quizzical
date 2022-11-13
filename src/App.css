@@ -13,7 +13,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	height: 100vh;
+	min-height: 100vh;
 	font-family: 'Poppins', sans-serif;
 }
 
@@ -54,4 +54,11 @@ body {
 .btn:disabled {
 	cursor: default;
 	background-color: gray;
+}
+
+@media (max-width: 800px) {
+	.app {
+		font-size: 1rem;
+		padding: 1rem;
+	}
 }
