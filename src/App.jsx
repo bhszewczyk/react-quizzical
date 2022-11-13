@@ -56,7 +56,6 @@ function App() {
 	}, []);
 
 	React.useEffect(() => {
-		console.log(questions);
 		setAnswersChecked(() => {
 			let count = 0;
 
@@ -69,22 +68,14 @@ function App() {
 		});
 	}, [questions]);
 
-	// React.useEffect(() => {
-	// 	scorePlayer(correctAnswers, userAnswers);
-	// }, [showScoreEl]);
-
 	function startPlaying() {
 		setIsPlaying(() => true);
 	}
 
 	function checkAnswerHandler(e, questionId, answerId) {
 		e.preventDefault();
-		// console.log(questions);
-		// console.log(questionId, answerId);
 
 		setQuestions((oldState) => {
-			// console.log(oldState[questionId].answers[answerId]);
-			// console.log(oldState[questionId].answers[answerId].isChecked);
 			let newState = [...oldState];
 
 			newState[questionId].answers.map((answer, id) => {
@@ -95,14 +86,12 @@ function App() {
 				}
 			});
 
-			// console.log(newState);
-
 			return newState;
 		});
 	}
 
 	function scorePlayer(correctAnsw, userAns) {
-		console.log(correctAnsw, userAns);
+		// console.log(correctAnsw, userAns);
 		setScore(() => {
 			let newScore = 0;
 			for (let i = 0; i < correctAnsw.length; i++) {

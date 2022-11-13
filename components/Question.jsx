@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function Question(props) {
-	console.log(props);
 	return (
 		<div className='question-container'>
 			<h3>{props.item.question}</h3>
