@@ -1,26 +1,16 @@
 import React from 'react';
 import './questions.css';
-import './questions.css';
+import Question from './Question';
 
 export default function Questions(props) {
 	const questionEls = props.questions.map((item, qIdx) => {
 		return (
-			<div key={qIdx} id={qIdx} className='question-container'>
-				<h3>{item.question}</h3>
-				<div className='answers-container'>
-					{item.answers.map((answer, aIdx) => {
-						return (
-							<span
-								key={aIdx}
-								onClick={(e) => props.checkAnswerHandler(e, qIdx, aIdx)}
-								className={answer.isChecked ? 'checked' : ''}
-							>
-								{decodeURIComponent(answer.value)}
-							</span>
-						);
-					})}
-				</div>
-			</div>
+			<Question
+				key={qIdx}
+				id={qIdx}
+				item={item}
+				checkAnswerHandler={props.checkAnswerHandler}
+			/>
 		);
 	});
 
