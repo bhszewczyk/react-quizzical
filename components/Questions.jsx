@@ -10,6 +10,8 @@ export default function Questions(props) {
 				id={qIdx}
 				item={item}
 				checkAnswerHandler={props.checkAnswerHandler}
+				showScoreEl={props.showScoreEl}
+				correctAnswers={props.correctAnswers}
 			/>
 		);
 	});
@@ -17,13 +19,17 @@ export default function Questions(props) {
 	return (
 		<div className='game-container'>
 			<div className='questions-container'>{questionEls}</div>
-			<button
-				className='btn btn-small'
-				onClick={props.checkResults}
-				disabled={props.answersChecked === 5 ? false : true}
-			>
-				Check answers
-			</button>
+			{props.showScoreEl ? (
+				''
+			) : (
+				<button
+					className='btn btn-small'
+					onClick={props.checkResults}
+					disabled={props.answersChecked === 5 ? false : true}
+				>
+					Check answers
+				</button>
+			)}
 		</div>
 	);
 }

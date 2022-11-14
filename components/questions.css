@@ -30,9 +30,18 @@
 }
 
 .answers-container span.checked {
-	background-color: chocolate;
+	background-color: #a15e49;
 	color: #fff;
 	border: 0;
+}
+
+.answers-container span.checked.correct,
+.answers-container span.correct {
+	background-color: #7bb7ae;
+}
+
+.answers-container span.checked.incorrect {
+	background-color: #c397ad;
 }
 
 @media (max-width: 800px) {

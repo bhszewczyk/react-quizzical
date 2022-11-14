@@ -1,7 +1,8 @@
 import React from 'react';
 import Answer from './Answer';
 
-export default function Question(props) {
+export default function Results(props) {
+	console.log(props.showScore);
 	return (
 		<div className='question-container'>
 			<h3>{props.item.question}</h3>
@@ -9,14 +10,12 @@ export default function Question(props) {
 				{props.item.answers.map((answer, aIdx) => {
 					return (
 						<Answer
-							props
 							key={aIdx}
 							id={props.id}
 							aIdx={aIdx}
 							checkAnswerHandler={props.checkAnswerHandler}
 							answer={answer}
-							showScoreEl={props.showScoreEl}
-							correctAnswer={props.correctAnswers[props.id]}
+							showScore={props.showScore}
 						/>
 					);
 				})}

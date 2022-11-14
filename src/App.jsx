@@ -4,6 +4,7 @@ import Start from '../components/Start';
 import Questions from '../components/Questions';
 import Score from '../components/Score';
 import BtnRestart from '../components/BtnRestart';
+import Results from '../components/Results';
 
 function App() {
 	const [isPlaying, setIsPlaying] = useState(false);
@@ -11,6 +12,8 @@ function App() {
 	const [answersChecked, setAnswersChecked] = useState(0);
 	const [showScoreEl, setShowScoreEl] = useState(false);
 	const [score, setScore] = useState(0);
+	const [correctAnswers, setCorrectAnswers] = useState([]);
+	const [userAnswers, setUserAnswers] = useState([]);
 
 	function fetchQuestions() {
 		fetch('https://opentdb.com/api.php?amount=5&category=17&encode=url3986')
@@ -66,7 +69,13 @@ function App() {
 
 			return count;
 		});
+
+		setCorrectAnswers(() => questions.map((question) => question.correct));
 	}, [questions]);
+
+	React.useEffect(() => {
+		scorePlayer(correctAnswers, userAnswers);
+	}, [correctAnswers, userAnswers]);
 
 	function startPlaying() {
 		setIsPlaying(() => true);
@@ -91,14 +100,15 @@ function App() {
 	}
 
 	function scorePlayer(correctAnsw, userAns) {
-		// console.log(correctAnsw, userAns);
+		const answersCorrect = [];
 		setScore(() => {
 			let newScore = 0;
 			for (let i = 0; i < correctAnsw.length; i++) {
 				if (correctAnsw[i] === userAns[i]) {
 					newScore++;
+					answersCorrect.push(true);
 				} else {
-					newScore;
+					answersCorrect.push(false);
 				}
 			}
 			return newScore;
@@ -106,19 +116,19 @@ function App() {
 	}
 
 	function checkResults() {
-		const correctAnswers = questions.map((question) => question.correct);
-		const userAnswers = [];
-
-		questions.map((q) =>
-			q.answers.map((a) => {
-				if (a.isChecked) {
-					userAnswers.push(decodeURIComponent(a.value));
-				}
-			})
-		);
+		setUserAnswers(() => {
+			const userAns = [];
+			questions.map((q) => {
+				q.answers.map((a) => {
+					if (a.isChecked) {
+						userAns.push(decodeURIComponent(a.value));
+					}
+				});
+			});
+			return userAns;
+		});
 
 		setShowScoreEl(true);
-		scorePlayer(correctAnswers, userAnswers);
 	}
 
 	function resetGame() {
@@ -131,15 +141,21 @@ function App() {
 		<div className='app'>
 			{!isPlaying ? (
 				<Start startPlaying={startPlaying} />
-			) : !showScoreEl ? (
+			) : (
 				<Questions
 					questions={questions}
 					checkResults={checkResults}
 					checkAnswerHandler={checkAnswerHandler}
 					answersChecked={answersChecked}
+					showScoreEl={showScoreEl}
+					correctAnswers={correctAnswers}
 				/>
+			)}{' '}
+			{!showScoreEl ? (
+				''
 			) : (
 				<div>
+					{/* <Results questions={questions} showScoreEl={showScoreEl} /> */}
 					<Score score={score} questionsNum={questions.length} />
 					<BtnRestart onclick={resetGame} />
 				</div>

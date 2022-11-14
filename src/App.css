@@ -47,10 +47,6 @@ body {
 	font-size: 1.6rem;
 }
 
-.answer.checked {
-	background-color: #e9a772;
-}
-
 .btn:disabled {
 	cursor: default;
 	background-color: gray;
